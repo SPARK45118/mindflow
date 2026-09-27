@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MindFlow • Cozy Cognitive Training & Focus Practice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Patrick+Hand&family=Quicksand:wght@500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Ambient Micro-Grid / Spec Particle Canvas -->
+  <canvas id="ambient-canvas"></canvas>
+
+  <div class="app-container">
+
+    <!-- Top Navigation Header -->
+    
+    <!-- =========================================================
+         SCREEN 1: WELCOME & INTRO SCREEN
+         ========================================================= -->
+    <!-- =========================================================
+         SCREEN 1: WELCOME & INTRO SCREEN
+         Enchanted Forest Artwork + Warm Frosted Oatmeal Veil + Card Glassmorphism
+         ========================================================= -->
+    <section class="screen-view screen-intro relative w-screen h-screen max-h-screen overflow-hidden bg-[#FAF7F2] text-[#2C2B29]" id="screen-intro">
+      <!-- Themed Forest Background -->
+      <div 
+        class="intro-forest-bg absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-100 scale-[1.01]"
+        style="background-image: url('assets/forest-bg.jpg');"
+      ></div>
+
+      <!-- Warm Frosted Oatmeal Veil -->
+      <div class="intro-forest-veil absolute inset-0 z-0 bg-[#FAF7F2]/4"></div>
+
+      <!-- Foreground Dashboard UI -->
+      <div class="intro-foreground-ui relative z-10 w-full h-full flex flex-col justify-between p-4 box-border select-none">
+        <div class="intro-grid-container w-full flex-1 grid grid-cols-12 gap-4 items-stretch min-h-0 my-2">
+
+          <!-- Left Column (3.5 Cols): 'The Sanctuary' -->
+          <div class="intro-card-clay col-span-12 lg:col-span-4 xl:col-span-3 bg-white/30 backdrop-blur-xl rounded-3xl p-4 border border-stone-200/90 shadow-sm flex flex-col justify-between overflow-hidden intro-col-sanctuary">
+            <div class="sanctuary-header">
+              <div class="sanctuary-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C27A65" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="clay-emblem-svg">
+                  <path d="M12 3c-4.5 4.5-6 9-6 12 0 3.3 2.7 6 6 6s6-2.7 6-6c0-3-1.5-7.5-6-12z"/>
+                  <path d="M12 21V11"/>
+                </svg>
+                <span class="sanctuary-badge-text">THE SANCTUARY</span>
+              </div>
+              <p class="sanctuary-description">A quiet cognitive gym engineered to counteract digital fragmentation and mental fatigue.</p>
+            </div>
+
+            <!-- 3 Core Pillars (Clean 28x28px clay-style icons, no system emojis) -->
+            <div class="sanctuary-pillars">
+              <div class="pillar-row">
+                <div class="pillar-clay-icon clay-coral">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    <circle cx="12" cy="11" r="3"/>
+                  </svg>
+                </div>
+                <div class="pillar-text">
+                  <div class="pillar-title">Executive Control</div>
+                  <div class="pillar-desc">Impulse suppression and task-switching fluidity.</div>
+                </div>
+              </div>
+
+              <div class="pillar-row">
+                <div class="pillar-clay-icon clay-mint">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="7" height="7" rx="2"/>
+                    <rect x="14" y="3" width="7" height="7" rx="2"/>
+                    <rect x="14" y="14" width="7" height="7" rx="2"/>
+                    <rect x="3" y="14" width="7" height="7" rx="2"/>
+                    <path d="M10 6.5h4"/><path d="M17.5 10v4"/><path d="M14 17.5h-4"/><path d="M6.5 14v-4"/>
+                  </svg>
+                </div>
+                <div class="pillar-text">
+                  <div class="pillar-title">Working Memory</div>
+                  <div class="pillar-desc">Visual-spatial active recall sequence training.</div>
+                </div>
+              </div>
+
+              <div class="pillar-row">
+                <div class="pillar-clay-icon clay-sky">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="9"/>
+                    <circle cx="12" cy="12" r="4"/>
+                    <path d="M12 2v3"/><path d="M12 19v3"/><path d="M2 12h3"/><path d="M19 12h3"/>
+                    <circle cx="12" cy="12" r="1.5" fill="currentColor"/>
+                  </svg>
+                </div>
+                <div class="pillar-text">
+                  <div class="pillar-title">Gaze Anchoring</div>
+                  <div class="pillar-desc">Stable ocular fixation and peripheral awareness.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom Note -->
+            <div class="sanctuary-bottom-note">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="note-icon">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+              <span>10 minutes of daily deliberate practice reshapes attentional neural pathways.</span>
+            </div>
+          </div>
+
+          <!-- Center Column (5 Cols): 'Hero & Direct Actions' -->
+          <div class="intro-card-clay col-span-12 lg:col-span-4 xl:col-span-6 bg-white/30 backdrop-blur-xl rounded-3xl p-4 border border-stone-200/90 shadow-sm flex flex-col justify-between items-center text-center overflow-hidden intro-col-hero">
+            <!-- Top Bar -->
+            <div class="hero-top-bar w-full flex items-center justify-between">
+              <div class="hero-mini-tag">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#5A9E87" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M11 20A7 7 0 0 1 4 13C4 7 11 3 11 3s7 4 7 10a7 7 0 0 1-7 7Z"/>
+                  <path d="M11 20v-9"/>
+                </svg>
+                <span>MINDFLOW SANCTUARY</span>
+              </div>
+              <div class="hero-top-buttons flex items-center gap-2">
+                <button class="zen-btn profile-nav-btn compact-nav-btn" id="btn-open-profile-intro" title="View LeetCode Profile &amp; Global Ranks">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                  </svg>
+                  <span class="user-name-label">Profile &amp; Ranks</span>
+                </button>
+                <button class="theme-toggle-pill compact-nav-btn" id="theme-toggle-intro" title="Toggle Starlit Night Mode (Key: D)">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon-svg">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                  </svg>
+                  <span class="theme-text">Night</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Middle Cluster (Tightly Grouped, No Hollow Space) -->
+            <div class="hero-middle-cluster flex flex-col items-center">
+              <div class="mascot-wrapper-clay">
+                <img src="assets/cute_brain_logo.png" alt="3D Clay Brain Mascot" class="mascot-clay-56">
+              </div>
+              <h1 class="hero-title-clean">TRAIN YOUR MIND.<br>CALM YOUR ATTENTION.</h1>
+              <p class="hero-subtitle-clean">Playful, neuroscience-backed cognitive workouts engineered to expand working memory and resist distraction without fatigue.</p>
+            </div>
+
+            <!-- Action Controls (Elevated Comfortably Above Taskbar) -->
+            <div class="hero-actions-container w-full flex flex-col items-center">
+              <button class="btn-primary-emerald" id="btn-intro-next">
+                <span>Start Daily Practice (5 min)</span>
+                <span class="btn-arrow">&rarr;</span>
+              </button>
+              <button class="btn-secondary-stone" id="btn-intro-login">
+                <span>Login / Sync Progress</span>
+              </button>
+              <p class="hero-microcopy">Login to save or view old progress</p>
+            </div>
+          </div>
+
+          <!-- Right Column (3.5 Cols): 'The 4-Phase Method' -->
+          <div class="intro-card-clay col-span-12 lg:col-span-4 xl:col-span-3 bg-white/30 backdrop-blur-xl rounded-3xl p-4 border border-stone-200/90 shadow-sm flex flex-col justify-between overflow-hidden intro-col-method">
+            <div class="method-header">
+              <div class="method-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5A9E87" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="clay-emblem-svg">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+                <span class="method-badge-text">THE METHOD</span>
+              </div>
+              <p class="method-description">A systematic 4-phase sequence calibrated for progressive cognitive load.</p>
+            </div>
+
+            <!-- 4 Clean Horizontal Phase Rows (No ellipses, zero text cutoff) -->
+            <div class="method-phases-list">
+              <div class="phase-card">
+                <div class="phase-tag-pill tag-phase-1">Phase 1</div>
+                <div class="phase-info">
+                  <div class="phase-title-row">
+                    <span class="phase-name">Priming</span>
+                    <span class="phase-duration">60s</span>
+                  </div>
+                  <div class="phase-summary">Calibrate rapid gaze tracking and ocular fixation.</div>
+                </div>
+              </div>
+
+              <div class="phase-card">
+                <div class="phase-tag-pill tag-phase-2">Phase 2</div>
+                <div class="phase-info">
+                  <div class="phase-title-row">
+                    <span class="phase-name">Inhibition</span>
+                    <span class="phase-duration">90s</span>
+                  </div>
+                  <div class="phase-summary">Suppress reflexive bias and enhance impulse control.</div>
+                </div>
+              </div>
+
+              <div class="phase-card">
+                <div class="phase-tag-pill tag-phase-3">Phase 3</div>
+                <div class="phase-info">
+                  <div class="phase-title-row">
+                    <span class="phase-name">Tracking</span>
+                    <span class="phase-duration">90s</span>
+                  </div>
+                  <div class="phase-summary">Parallel multi-target tracking across dynamic visual fields.</div>
+                </div>
+              </div>
+
+              <div class="phase-card">
+                <div class="phase-tag-pill tag-phase-4">Phase 4</div>
+                <div class="phase-info">
+                  <div class="phase-title-row">
+                    <span class="phase-name">Working Memory</span>
+                    <span class="phase-duration">60s</span>
+                  </div>
+                  <div class="phase-summary">Active dual n-back buffer recall.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom Badge -->
+            <div class="method-bottom-badge">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" class="protocol-icon">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+              </svg>
+              <span>Informed by clinical ocular &amp; n-back cognitive training protocols.</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         SCREEN 2: DEDICATED MODE SELECTION SCREEN
+         ========================================================= -->
+    <section class="screen-view screen-mode-select" id="screen-mode-select" style="display: none;">
+      <div class="mode-select-header">
+        <div class="mode-select-header-left">
+          <button class="back-nav-btn" id="btn-back-to-intro" title="Back to Welcome Screen">
+            <span class="back-arrow">&larr;</span> Back to Welcome
+          </button>
+          <div class="select-header-titles">
+            <h2 class="select-main-title">CHOOSE YOUR FOCUS GAME</h2>
+            <p class="select-subtitle">Select a targeted cognitive discipline below, or start the 4-phase Daily Circuit.</p>
+          </div>
+        </div>
+
+        <div class="mode-select-header-right">
+          <button class="zen-btn profile-nav-btn" id="btn-open-profile-modes" title="View LeetCode Profile & Global Ranks">
+            <span class="avatar-icon-mini" id="header-avatar-mini">🧠</span>
+            <span class="user-name-label">Profile &amp; Ranks</span>
+          </button>
+          <button class="zen-btn theme-toggle-pill" id="theme-toggle-select" title="Toggle Starlit Night Mode (Key: D)">
+            <span class="theme-icon">🌙</span>
+            <span class="theme-text">Night</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Cognitive Training Dashboard Metrics (4 Graph Paper Cards) -->
+<!-- Middle Section: Four Playful Dashboard Cards With Graph Paper Grid (From Screenshot) -->
+    <section class="focus-stats-strip" aria-label="Focus Metrics">
+      <!-- Card 1: Focus Index -->
+      <div class="stat-block card-focus-index">
+        <div class="stat-card-header">
+          <span class="stat-tag">FOCUS INDEX</span>
+          <svg class="trend-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5a8b75" stroke-width="2.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+        </div>
+        <div class="stat-body-row">
+          <div class="circular-gauge-box">
+            <svg class="gauge-svg" width="60" height="60" viewBox="0 0 60 60">
+              <circle class="gauge-bg" cx="30" cy="30" r="24"></circle>
+              <circle class="gauge-fill" cx="30" cy="30" r="24"></circle>
+            </svg>
+            <span class="gauge-number" id="stat-focus-score">82</span>
+          </div>
+          <div class="stat-gauge-meta">
+            <div class="status-trend-pill">↗ ↑</div>
+            <div class="status-trend-text">Improving!</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Daily Streak -->
+      <div class="stat-block card-daily-streak">
+        <div class="stat-card-header">
+          <span class="stat-tag">DAILY STREAK</span>
+          <span class="header-icon">📅</span>
+        </div>
+        <div class="stat-body-row">
+          <div class="streak-text-col">
+            <span class="stat-big-val" id="stat-streak">5 Days</span>
+          </div>
+          <!-- Mini Pixel Habit Grid -->
+          <div class="pixel-calendar-grid" title="Daily habit consistency">
+            <div class="pixel-box filled-teal"></div>
+            <div class="pixel-box filled-clay"></div>
+            <div class="pixel-box filled-teal"></div>
+            <div class="pixel-box filled-clay"></div>
+            <div class="pixel-box filled-clay"></div>
+            <div class="pixel-box filled-teal"></div>
+            <div class="pixel-box filled-teal"></div>
+            <div class="pixel-box filled-clay"></div>
+            <div class="pixel-box filled-teal"></div>
+            <div class="pixel-box filled-clay"></div>
+            <div class="pixel-box filled-teal"></div>
+            <div class="pixel-box filled-clay"></div>
+            <div class="pixel-box filled-teal"></div>
+            <div class="pixel-box filled-teal"></div>
+            <div class="pixel-box filled-clay"></div>
+            <div class="pixel-box filled-teal"></div>
+            <div class="pixel-box filled-clay"></div>
+            <div class="pixel-box filled-clay"></div>
+            <div class="pixel-box filled-teal"></div>
+            <div class="pixel-box filled-teal"></div>
+            <div class="pixel-box filled-teal"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Response Time -->
+      <div class="stat-block card-response-time">
+        <div class="stat-card-header">
+          <span class="stat-tag">RESPONSE TIME</span>
+          <svg class="trend-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7a8f9c" stroke-width="2.5"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline></svg>
+        </div>
+        <div class="stat-body-row">
+          <div class="metric-text-col">
+            <span class="stat-big-val" id="stat-reaction">1590 ms</span>
+            <span class="stat-sub">Reaction window</span>
+          </div>
+          <div class="metric-graph-col">
+            <svg class="wave-graph-svg" width="70" height="28" viewBox="0 0 70 28">
+              <path d="M 0 22 Q 18 2, 35 16 T 70 8 L 70 28 L 0 28 Z" fill="rgba(122, 178, 204, 0.25)"></path>
+              <path d="M 0 22 Q 18 2, 35 16 T 70 8" fill="none" stroke="#68a3c2" stroke-width="2.2" stroke-linecap="round"></path>
+            </svg>
+            <span class="graph-tag">Stabilizing</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4: Deep Work Time -->
+      <div class="stat-block card-deep-work">
+        <div class="stat-card-header">
+          <span class="stat-tag">DEEP WORK TIME</span>
+          <span class="header-icon">🕒</span>
+        </div>
+        <div class="stat-body-row">
+          <div class="metric-text-col">
+            <span class="stat-big-val" id="stat-time">5 min</span>
+            <span class="stat-sub">Deep Focus</span>
+          </div>
+          <div class="clock-illustration-col">
+            <div class="mini-cozy-clock">
+              <span class="clock-hand hand-hour"></span>
+              <span class="clock-hand hand-min"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+      <!-- Mode Selection Grid (All 11 Dedicated Cards) -->
+      <div class="modes-selection-grid">
+        <!-- 01 Daily Circuit (Featured Card) -->
+        <div class="select-mode-card featured-circuit-card" data-mode="circuit">
+          <div class="card-top-row">
+            <div class="card-icon-box wood-box">⚡</div>
+            <span class="card-badge badge-featured">★ Recommended • 4 Phases</span>
+          </div>
+          <h3 class="card-name">Daily Focus Circuit</h3>
+          <p class="card-desc">The flagship routine. Progress through MOT, Chroma Shift, Dual N-Back, and Zen Rhythm in a seamless flow.</p>
+          <div class="card-bottom-row">
+            <span class="card-skill-tag">Complete Cognitive Circuit</span>
+            <button class="select-play-btn" data-mode="circuit">Start Circuit &rarr;</button>
+          </div>
+        </div>
+
+        <!-- 02 Orb Track (MOT) -->
+        <div class="select-mode-card" data-mode="mot">
+          <div class="card-top-row">
+            <div class="card-icon-box pastel-box-mint">🔮</div>
+            <span class="card-badge">Sustained Gaze</span>
+          </div>
+          <h3 class="card-name">Orb Track (MOT)</h3>
+          <p class="card-desc">Track designated floating forest spirits as they glide through identical distractors in the magical clearing.</p>
+          <div class="card-bottom-row">
+            <span class="card-skill-tag">Peripheral Tracking</span>
+            <button class="select-play-btn" data-mode="mot">Play Game &rarr;</button>
+          </div>
+        </div>
+
+        <!-- 03 Chroma Shift -->
+        <div class="select-mode-card" data-mode="stroop">
+          <div class="card-top-row">
+            <div class="card-icon-box pastel-box-purple">🎨</div>
+            <span class="card-badge">Impulse Control</span>
+          </div>
+          <h3 class="card-name">Chroma Shift (2.0)</h3>
+          <p class="card-desc">Classic Stroop cognitive conflict. Respond to ink color while inhibiting the automatic urge to read the word.</p>
+          <div class="card-bottom-row">
+            <span class="card-skill-tag">Inhibitory Control</span>
+            <button class="select-play-btn" data-mode="stroop">Play Game &rarr;</button>
+          </div>
+        </div>
+
+        <!-- 04 Dual N-Back -->
+        <div class="select-mode-card" data-mode="nback">
+          <div class="card-top-row">
+            <div class="card-icon-box wood-box">🧩</div>
+            <span class="card-badge">Working Memory</span>
+          </div>
+          <h3 class="card-name">Dual N-Back Matrix</h3>
+          <p class="card-desc">The gold standard in memory training. Simultaneously track grid coordinates and chime pitch from 2 steps back.</p>
+          <div class="card-bottom-row">
+            <span class="card-skill-tag">Executive Retention</span>
+            <button class="select-play-btn" data-mode="nback">Play Game &rarr;</button>
+          </div>
+        </div>
+
+        <!-- 05 Zen Rhythm -->
+        <div class="select-mode-card" data-mode="zenflow">
+          <div class="card-top-row">
+            <div class="card-icon-box pastel-box-lavender">🎵</div>
+            <span class="card-badge">Flow &amp; Breath</span>
+          </div>
+          <h3 class="card-name">Zen Rhythm &amp; Breath</h3>
+          <p class="card-desc">Calm nervous system coherence. Tap ripple rings at peak harmonic resonance while following 4-4-4-4 box breathing.</p>
+          <div class="card-bottom-row">
+            <span class="card-skill-tag">Resonance &amp; Calming</span>
+            <button class="select-play-btn" data-mode="zenflow">Play Game &rarr;</button>
+          </div>
+        </div>
+
+        <!-- 06 Flanker Horizon -->
+        <div class="select-mode-card" data-mode="flanker">
+          <div class="card-top-row">
+            <div class="card-icon-box wood-box">🎯</div>
+            <span class="card-badge">Spatial Filtering</span>
+          </div>
+          <h3 class="card-name">Flanker Horizon</h3>
+          <p class="card-desc">Eriksen flanker task. Isolate the center arrow target and filter out conflicting surrounding distractors.</p>
+          <div class="card-bottom-row">
+            <span class="card-skill-tag">Directional Focus</span>
+            <button class="select-play-btn" data-mode="flanker">Play Game &rarr;</button>
+          </div>
+        </div>
+
+        <!-- 07 Gaze Anchor -->
+        <div class="select-mode-card" data-mode="gaze">
+          <div class="card-top-row">
+            <div class="card-icon-box wood-box">👁️</div>
+            <span class="card-badge">Reflex Override</span>
+          </div>
+          <h3 class="card-name">Gaze Anchor</h3>
+          <p class="card-desc">Anti-saccade training. Anchor gaze on the center crosshair and strike the opposite side when a peripheral flash occurs.</p>
+          <div class="card-bottom-row">
+            <span class="card-skill-tag">Saccadic Control</span>
+            <button class="select-play-btn" data-mode="gaze">Play Game &rarr;</button>
+          </div>
+        </div>
+
+        <!-- 08 Corsi Trail -->
+        <div class="select-mode-card" data-mode="corsi">
+          <div class="card-top-row">
+            <div class="card-icon-box pastel-box-peach">🍄</div>
+            <span class="card-badge">Spatial Sequence</span>
+          </div>
+          <h3 class="card-name">Corsi Trail</h3>
+          <p class="card-desc">Visuospatial memory span. Memorize the glowing mushroom sequence, then tap the stones in the exact order.</p>
+          <div class="card-bottom-row">
+            <span class="card-skill-tag">Memory Span</span>
+            <button class="select-play-btn" data-mode="corsi">Play Game &rarr;</button>
+          </div>
+        </div>
+
+        <!-- 09 Signal & Void -->
+        <div class="select-mode-card" data-mode="pvt">
+          <div class="card-top-row">
+            <div class="card-icon-box wood-box">⏱️</div>
+            <span class="card-badge">Vigilance</span>
+          </div>
+          <h3 class="card-name">Signal &amp; Void (PVT)</h3>
+          <p class="card-desc">Psychomotor vigilance testing. Rest in stillness and trigger with lightning speed the moment the visual cue flashes.</p>
+          <div class="card-bottom-row">
+            <span class="card-skill-tag">Reaction Latency</span>
+            <button class="select-play-btn" data-mode="pvt">Play Game &rarr;</button>
+          </div>
+        </div>
+
+        <!-- 10 Equilibrium -->
+        <div class="select-mode-card" data-mode="equilibrium">
+          <div class="card-top-row">
+            <div class="card-icon-box pastel-box-mint">⚖️</div>
+            <span class="card-badge">Sensorimotor</span>
+          </div>
+          <h3 class="card-name">Equilibrium</h3>
+          <p class="card-desc">Continuous attention tracking. Balance the pendulum in equilibrium using gentle left/right fine adjustments.</p>
+          <div class="card-bottom-row">
+            <span class="card-skill-tag">Motor Steadiness</span>
+            <button class="select-play-btn" data-mode="equilibrium">Play Game &rarr;</button>
+          </div>
+        </div>
+
+        <!-- 11 Tempo Lock -->
+        <div class="select-mode-card" data-mode="tempo">
+          <div class="card-top-row">
+            <div class="card-icon-box pastel-box-lavender">🔔</div>
+            <span class="card-badge">Internal Clock</span>
+          </div>
+          <h3 class="card-name">Tempo Lock</h3>
+          <p class="card-desc">Internal timekeeper training. Listen to 4 calibration beats, then maintain the exact tempo across 8 silent intervals.</p>
+          <div class="card-bottom-row">
+            <span class="card-skill-tag">Rhythmic Precision</span>
+            <button class="select-play-btn" data-mode="tempo">Play Game &rarr;</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         SCREEN 3: DEDICATED PLAY SCREEN (ACTIVE GAMEPLAY)
+         ========================================================= -->
+    <section class="screen-view screen-play" id="screen-play" style="display: none;">
+<header class="app-header">
+      <div class="brand" id="brand-home" title="MindFlow Focus Sanctuary">
+        <div class="brand-mascot-wrapper">
+          <img src="assets/cute_brain_logo.png" alt="MindFlow Cute Brain Logo" class="brand-brain-img">
+        </div>
+        <div class="brand-meta">
+          <h1 class="brand-title">MIND FLOW</h1>
+          <div class="brand-tagline">CONTEMPLATIVE FOCUS PRACTICE</div>
+        </div>
+      </div>
+
+      <!-- Header Center / Right Controls (Focus Drone & User Badge) -->
+      <div class="top-nav-right">
+        <!-- Dedicated Mode Selection Switcher Button (Takes player back to Screen 2) -->
+        <button class="mode-select-nav-btn" id="btn-back-to-modes" title="Switch to another focus game">
+          <span>🎮 Choose Game</span>
+        </button>
+
+        <!-- Profile & Ranks Nav Button -->
+        <button class="zen-btn profile-nav-btn" id="btn-open-profile-play" title="View LeetCode Profile & Global Ranks">
+          <span>🏆 Profile &amp; Ranks</span>
+        </button>
+
+        <!-- Cozy Focus Drone Pill (Matches Screenshot) -->
+        <div class="top-focus-drone-pill">
+          <span class="pill-label">FOCUS DRONE: Calm Ambience</span>
+          <button class="top-speaker-btn" id="btn-ambient-sound" title="Toggle Focus Drone">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+            </svg>
+          </button>
+          <input type="range" class="top-drone-slider" id="slider-ambient-vol" min="0" max="1" step="0.05" value="0.35" title="Drone Volume">
+          <span id="ambient-text" style="display: none;">Drone: Off</span>
+        </div>
+
+        <!-- Theme Mode Toggle Pill -->
+        <button class="theme-toggle-pill" id="theme-toggle-btn" title="Toggle Starlit Night Mode (Key: D)">
+          <span class="theme-icon">🌙</span>
+          <span class="theme-text">Night</span>
+        </button>
+
+        <!-- User Avatar Button (Opens Profile/Login) -->
+        <button class="user-avatar-badge" id="btn-user-avatar-play" title="Switch User / Edit Profile">
+          <span id="header-avatar-play">🧠</span>
+        </button>
+
+        <!-- Hidden / Compact Action Buttons for Accessibility & Shortcuts -->
+        <div class="header-actions">
+          <button class="zen-btn icon-only" id="btn-audio-settings" title="Audio Levels">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="4" y1="21" x2="4" y2="14"></line>
+              <line x1="4" y1="10" x2="4" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12" y2="3"></line>
+              <line x1="20" y1="21" x2="20" y2="16"></line>
+              <line x1="20" y1="12" x2="20" y2="3"></line>
+            </svg>
+          </button>
+
+          <button class="zen-btn" id="btn-fullscreen" title="Toggle Fullscreen (Key: F)">
+            <span id="fullscreen-icon">⛶</span>
+            <span id="fullscreen-text">Fullscreen</span>
+          </button>
+
+          <button class="zen-btn" id="btn-stats-modal" title="View Focus Summary">
+            <span>Stats</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Audio Dropdown Panel (for advanced fine tuning) -->
+      <div class="audio-panel-dropdown" id="audio-dropdown">
+        <div class="dropdown-header">SOUNDSCAPE CALIBRATION</div>
+        <div class="audio-row">
+          <label><span>Ambient 432Hz Drone</span><span id="lbl-ambient-vol" class="mono-val">35%</span></label>
+        </div>
+        <div class="audio-row">
+          <label><span>Chime Resonance</span><span id="lbl-sfx-vol" class="mono-val">55%</span></label>
+          <input type="range" id="slider-sfx-vol" min="0" max="1" step="0.05" value="0.55">
+        </div>
+      </div>
+    </header>
+
+
+
+    <!-- Horizontal Step Progress Tracker (From Screenshot) -->
+    <div class="phase-progress-tracker" aria-label="Circuit Progress">
+      <div class="tracker-rail">
+        <div class="tracker-node node-active">
+          <div class="node-bullet"></div>
+          <span class="node-label">Phase 1: Gaze Anchoring - Active</span>
+        </div>
+        <div class="tracker-node">
+          <div class="node-bullet"></div>
+          <span class="node-label">Phase 2: Peripheral Attention</span>
+        </div>
+        <div class="tracker-node">
+          <div class="node-bullet"></div>
+          <span class="node-label">Phase 3: Object Memory</span>
+        </div>
+        <div class="tracker-node">
+          <div class="node-bullet"></div>
+          <span class="node-label">Phase 4: Combined Task</span>
+        </div>
+      </div>
+    </div>
+
+    
+
+    <!-- Main Content Area: Game Stage + Right Sidebar -->
+    <div class="app-body-layout">
+
+      <!-- Main Game Section (Framed in Soft Wooden Border) -->
+      <main class="main-stage">
+
+        <!-- Stage Top HUD -->
+        <div class="stage-hud">
+          <div class="hud-left">
+            <div class="stage-indicator-box">
+              <span class="pulse-indicator"></span>
+              <span class="stage-title" id="stage-title-text">Daily Focus Circuit</span>
+            </div>
+            <div class="stage-badge" id="stage-level-badge">Phase 1 of 4</div>
+          </div>
+
+          <div class="hud-center">
+            <div class="hud-metric">
+              <span class="hud-metric-label">Score</span>
+              <span class="hud-metric-val" id="hud-score">0</span>
+            </div>
+            <div class="hud-metric">
+              <span class="hud-metric-label">Accuracy</span>
+              <span class="hud-metric-val" id="hud-accuracy">100%</span>
+            </div>
+            <div class="hud-metric">
+              <span class="hud-metric-label">Streak</span>
+              <span class="hud-metric-val" id="hud-streak">0x</span>
+            </div>
+            <div class="hud-metric">
+              <span class="hud-metric-label">Remaining</span>
+              <span class="hud-metric-val" id="hud-timer">43s</span>
+            </div>
+          </div>
+
+          <div class="hud-right">
+            <button class="zen-btn hud-btn btn-purple" id="btn-pause-game" title="Pause or Resume">
+              <span id="pause-icon">Pause</span>
+            </button>
+            <button class="zen-btn hud-btn btn-cream" id="btn-restart-game" title="Restart Mode">
+              <span>Reset</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mindful Guidance Tip Bar -->
+        <div class="guidance-banner">
+          <div class="guidance-left-items">
+            <div class="guidance-bullet-label">■ TARGET MEMORIZATION</div>
+            <div class="guidance-mini-track">
+              <span class="mini-track-dot active"></span>
+              <span class="mini-track-dot active"></span>
+              <span class="mini-track-dot"></span>
+              <span class="mini-track-dot"></span>
+            </div>
+            <div class="guidance-tip" id="guidance-text">
+              <span class="tip-marker">■</span>
+              <span>SESSION GOAL: Increase Gaze Retention</span>
+            </div>
+          </div>
+          <div class="guidance-shortcuts">
+            <span>Start: <span class="key">Space</span></span>
+            <span>Fullscreen: <span class="key">F</span></span>
+            <span>Mute: <span class="key">M</span></span>
+          </div>
+        </div>
+
+        <!-- Game Stage Interactive Viewport (Storybook Forest Centerpiece) -->
+        <div class="game-viewport" id="game-viewport">
+
+          <!-- Stage 1 & 4 & Circuit Canvas View (Storybook Forest Arena) -->
+          <div class="game-canvas-container mot-focus-zone" id="canvas-game-wrapper">
+            <canvas id="active-game-canvas"></canvas>
+            <!-- Cute Storybook Speech Bubble Notification -->
+            <div class="canvas-state-overlay cozy-speech-bubble" id="canvas-overlay-msg">
+              Memorize the 3 highlighted targets...
+            </div>
+            <!-- Matching Phase Goal Pill (From Screenshot) -->
+            <div class="matching-phase-pill" id="matching-phase-pill">
+              <div class="pill-head">MATCHING PHASE:</div>
+              <div class="pill-desc">Find the target sequence</div>
+              <div class="pill-dots">
+                <span class="p-dot dot-cyan"></span>
+                <span class="p-dot dot-purple"></span>
+                <span class="p-dot dot-mint"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mode 2: Chroma Shift (Stroop & Inhibitory Control) -->
+          <div class="chroma-container" id="chroma-game-wrapper" style="display: none;">
+            <div class="chroma-rule-pill rule-color" id="chroma-rule-pill">
+              <span class="rule-indicator-pip" id="chroma-rule-icon">■</span>
+              <span id="chroma-rule-text">Rule: Match the Ink Color</span>
+            </div>
+
+            <div class="chroma-stimulus-card">
+              <div class="chroma-stimulus-text" id="chroma-word" style="color: var(--accent-clay);">CLAY</div>
+              <div class="chroma-stimulus-sub" id="chroma-subtext">Respond calmly before the interval closes</div>
+              <div class="chroma-time-bar" id="chroma-time-bar"></div>
+            </div>
+
+            <div class="chroma-options-grid" id="chroma-buttons">
+              <button class="chroma-choice-btn color-teal" data-choice="teal" id="chroma-btn-teal">
+                <span class="choice-title">Clay</span>
+                <span class="key-badge">1 / ←</span>
+              </button>
+              <button class="chroma-choice-btn color-rose" data-choice="rose" id="chroma-btn-rose">
+                <span class="choice-title">Sage</span>
+                <span class="key-badge">2 / ↑</span>
+              </button>
+              <button class="chroma-choice-btn color-lavender" data-choice="lavender" id="chroma-btn-lavender">
+                <span class="choice-title">Sand</span>
+                <span class="key-badge">3 / ↓</span>
+              </button>
+              <button class="chroma-choice-btn color-gold" data-choice="gold" id="chroma-btn-gold">
+                <span class="choice-title">Cream</span>
+                <span class="key-badge">4 / →</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Mode 3: Dual N-Back Matrix -->
+          <div class="nback-container" id="nback-game-wrapper" style="display: none;">
+            <div class="nback-level-tag">
+              <span class="tag-title">Training: <strong id="nback-n-label">2-Back</strong></span>
+              <span class="hairline-sep">|</span>
+              <span class="sound-wave-icon" id="nback-sound-indicator">
+                <span></span><span></span><span></span><span></span>
+              </span>
+              <span id="nback-step-counter" class="step-counter">Step 1 of 20</span>
+            </div>
+
+            <div class="nback-grid" id="nback-grid">
+              <div class="nback-cell" data-idx="0"><span class="cell-num">1</span></div>
+              <div class="nback-cell" data-idx="1"><span class="cell-num">2</span></div>
+              <div class="nback-cell" data-idx="2"><span class="cell-num">3</span></div>
+              <div class="nback-cell" data-idx="3"><span class="cell-num">4</span></div>
+              <div class="nback-cell" data-idx="4"><span class="cell-num">5</span></div>
+              <div class="nback-cell" data-idx="5"><span class="cell-num">6</span></div>
+              <div class="nback-cell" data-idx="6"><span class="cell-num">7</span></div>
+              <div class="nback-cell" data-idx="7"><span class="cell-num">8</span></div>
+            </div>
+
+            <div class="nback-controls">
+              <button class="nback-match-btn" id="nback-btn-pos">
+                <span class="btn-main">Position Match</span>
+                <span class="btn-sub">[A] Key</span>
+              </button>
+              <button class="nback-match-btn" id="nback-btn-sound">
+                <span class="btn-main">Sound Match</span>
+                <span class="btn-sub">[L] Key</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Zen Breath Pacer Bar (Integrated when in Zen Rhythm Mode) -->
+        <div class="breath-pacer-box" id="breath-pacer-container" style="display: none;">
+          <div class="breath-circle-guide" id="breath-circle"></div>
+          <span class="breath-phase-text" id="breath-phase-label">Breathe In... (4s)</span>
+        </div>
+
+        <!-- Mode 6: Flanker Horizon (Directional Spatial Filtering) -->
+        <div class="flanker-container" id="flanker-game-wrapper" style="display: none;">
+          <div class="game-rule-pill">
+            <span class="rule-indicator-pip">◈</span>
+            <span id="flanker-rule-text">Focus solely on the CENTER arrow. Filter out distractors.</span>
+          </div>
+          <div class="flanker-stimulus-card">
+            <div class="flanker-arrow-display" id="flanker-arrows">
+              <span class="flanker-arrow flanker-distractor">‹</span>
+              <span class="flanker-arrow flanker-distractor">‹</span>
+              <span class="flanker-arrow flanker-target" id="flanker-target-arrow">›</span>
+              <span class="flanker-arrow flanker-distractor">‹</span>
+              <span class="flanker-arrow flanker-distractor">‹</span>
+            </div>
+            <div class="flanker-time-bar" id="flanker-time-bar"></div>
+          </div>
+          <div class="flanker-controls">
+            <button class="flanker-choice-btn" id="flanker-btn-left" data-dir="left">
+              <span class="btn-main">← Pointing Left</span>
+              <span class="btn-sub">[←] / [A]</span>
+            </button>
+            <button class="flanker-choice-btn" id="flanker-btn-right" data-dir="right">
+              <span class="btn-main">Pointing Right →</span>
+              <span class="btn-sub">[→] / [D]</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mode 7: Gaze Anchor (Anti-Saccade Reflex Suppression) -->
+        <div class="gaze-container" id="gaze-game-wrapper" style="display: none;">
+          <div class="game-rule-pill">
+            <span class="rule-indicator-pip">◎</span>
+            <span id="gaze-rule-text">Reflex Suppression: Strike the OPPOSITE side when the flash appears.</span>
+          </div>
+          <div class="gaze-arena">
+            <div class="gaze-sensor-box gaze-left" id="gaze-target-left" data-side="left">
+              <span class="gaze-bracket">[</span>
+              <span class="gaze-label">LEFT (← / A)</span>
+              <span class="gaze-flash-pip" id="gaze-pip-left"></span>
+            </div>
+            <div class="gaze-center-anchor">
+              <div class="gaze-crosshair" id="gaze-crosshair">+</div>
+              <div class="gaze-status-msg" id="gaze-center-msg">Anchor Gaze</div>
+            </div>
+            <div class="gaze-sensor-box gaze-right" id="gaze-target-right" data-side="right">
+              <span class="gaze-bracket">]</span>
+              <span class="gaze-label">RIGHT (→ / D)</span>
+              <span class="gaze-flash-pip" id="gaze-pip-right"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mode 8: Corsi Matrix (Spatial Working Memory Trail) -->
+        <div class="corsi-container" id="corsi-game-wrapper" style="display: none;">
+          <div class="corsi-status-header">
+            <span class="corsi-level-tag">Path Span: <strong id="corsi-span-label">3 Stones</strong></span>
+            <span class="hairline-sep">|</span>
+            <span id="corsi-phase-indicator" class="corsi-phase">Observing Path...</span>
+          </div>
+          <div class="corsi-board" id="corsi-board">
+            <button class="corsi-stone" data-idx="0" style="top: 15%; left: 18%;"><span class="stone-core"></span></button>
+            <button class="corsi-stone" data-idx="1" style="top: 12%; left: 72%;"><span class="stone-core"></span></button>
+            <button class="corsi-stone" data-idx="2" style="top: 38%; left: 45%;"><span class="stone-core"></span></button>
+            <button class="corsi-stone" data-idx="3" style="top: 42%; left: 10%;"><span class="stone-core"></span></button>
+            <button class="corsi-stone" data-idx="4" style="top: 40%; left: 82%;"><span class="stone-core"></span></button>
+            <button class="corsi-stone" data-idx="5" style="top: 70%; left: 24%;"><span class="stone-core"></span></button>
+            <button class="corsi-stone" data-idx="6" style="top: 72%; left: 66%;"><span class="stone-core"></span></button>
+            <button class="corsi-stone" data-idx="7" style="top: 86%; left: 44%;"><span class="stone-core"></span></button>
+            <button class="corsi-stone" data-idx="8" style="top: 24%; left: 88%;"><span class="stone-core"></span></button>
+          </div>
+        </div>
+
+        <!-- Mode 9: Signal & Void (Psychomotor Vigilance / Micro-Perception) -->
+        <div class="pvt-container" id="pvt-game-wrapper" style="display: none;">
+          <div class="game-rule-pill">
+            <span class="rule-indicator-pip">✦</span>
+            <span id="pvt-rule-text">Sustained Vigilance: Rest in the void. Trigger instantly when signal appears.</span>
+          </div>
+          <div class="pvt-arena" id="pvt-click-area">
+            <div class="pvt-aperture-core" id="pvt-target-circle">
+              <div class="pvt-chrono-display" id="pvt-timer-display">READY</div>
+              <div class="pvt-sub-prompt" id="pvt-prompt-text">Rest mindfully...</div>
+            </div>
+          </div>
+          <div class="pvt-instruction-badge">Tap <span class="key">Space</span> or Click field on signal • Avoid premature clicks</div>
+        </div>
+
+        <!-- Mode 10: Equilibrium HUD overlay (Uses Game Canvas) -->
+        <div class="equilibrium-hud-bar" id="equilibrium-hud-bar" style="display: none;">
+          <div class="equilibrium-metric">
+            <span>Center Steadiness:</span>
+            <div class="equilibrium-gauge">
+              <div class="equilibrium-fill" id="equilibrium-gauge-fill"></div>
+            </div>
+            <strong id="equilibrium-percent" class="mono-val">0%</strong>
+          </div>
+        </div>
+
+        <!-- Mode 11: Tempo Lock (Internal Rhythmic Clock & Entrainment) -->
+        <div class="tempo-container" id="tempo-game-wrapper" style="display: none;">
+          <div class="game-rule-pill">
+            <span class="rule-indicator-pip">∿</span>
+            <span id="tempo-rule-desc">Listen to 4 beats, then continue the exact rhythm in silence.</span>
+          </div>
+          <div class="tempo-card">
+            <div class="tempo-visualizer" id="tempo-visualizer">
+              <div class="tempo-pulse-ring" id="tempo-pulse-ring"></div>
+              <div class="tempo-beat-count" id="tempo-beat-label">Calibration: Beat 1</div>
+            </div>
+            <div class="tempo-feedback-text" id="tempo-feedback-msg">Calibrating internal clock...</div>
+          </div>
+          <button class="tempo-tap-btn" id="tempo-tap-btn">
+            <span class="btn-main">Tap Tempo Rhythm</span>
+            <span class="btn-sub">[Space] / Click</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Mode Intro / Pre-start Overlay (Cozy Storybook Card) -->
+        <div class="stage-intro-overlay" id="stage-intro-overlay">
+          <div class="intro-asymmetric-grid">
+            <!-- Left Column (Cozy Whimsical Tone) -->
+            <div class="intro-left-col">
+              <div class="intro-proto-tag" id="intro-icon">🌸 Mindful Attention</div>
+              <h2 class="intro-title" id="intro-title">Daily Focus Circuit</h2>
+              <div class="intro-rule-line"></div>
+              <p class="intro-desc" id="intro-desc">
+                A serene progression designed to cultivate quiet presence, expand working memory, and strengthen the mind's ability to resist distraction.
+              </p>
+            </div>
+
+            <!-- Right Column (Clear Friendly CTA) -->
+            <div class="intro-right-col">
+              <div class="manifest-header">SESSION PHASES</div>
+              <ul class="intro-instructions" id="intro-instructions">
+                <li>Phase 1: Multiple Object Tracking (Peripheral Forest Spirits)</li>
+                <li>Phase 2: Chroma Shift (Gentle Impulse Control)</li>
+                <li>Phase 3: Dual N-Back (Working Memory Matrix)</li>
+                <li>Phase 4: Zen Rhythm (Resonance Calibration &amp; Flow)</li>
+              </ul>
+              <button class="cta-btn" id="btn-start-stage">
+                <span>Begin Practice</span>
+                <span class="cta-arrow">&rarr;</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </main>
+
+      <!-- Right Column (340px Sidebar): Focus Index & LeetCode Activity Grid -->
+      <aside class="cozy-sidebar" aria-label="Focus Metrics & Activity">
+
+        <!-- 1. Focus Index Card (Sidebar Widget) -->
+        <div class="sidebar-card sidebar-focus-card">
+          <div class="sb-card-top-row">
+            <span class="sb-card-title">FOCUS INDEX</span>
+            <span class="sb-tier-badge">Top 15%</span>
+          </div>
+          <div class="sb-focus-content">
+            <div class="sb-circular-gauge">
+              <svg class="sb-gauge-svg" width="66" height="66" viewBox="0 0 72 72">
+                <circle class="sb-gauge-bg" cx="36" cy="36" r="28"></circle>
+                <circle class="sb-gauge-fill" id="sb-gauge-circle" cx="36" cy="36" r="28"></circle>
+              </svg>
+              <div class="sb-gauge-center">
+                <span class="sb-gauge-val" id="sidebar-focus-score">64</span>
+                <span class="sb-gauge-total">/100</span>
+              </div>
+            </div>
+            <div class="sb-focus-info">
+              <span class="sb-resonance-badge">High Resonance</span>
+              <p class="sb-focus-subtext">Inhibitory balance is stable &amp; centered.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Days Active Card (LeetCode Compact Style Heatmap) -->
+        <div class="sidebar-card sidebar-activity-card">
+          <div class="sb-card-top-row">
+            <span class="sb-card-title">DAYS ACTIVE</span>
+            <select class="sb-month-select" id="activity-month-select" aria-label="Select Activity Month">
+              <!-- Populated dynamically via JS: Jan to Dec -->
+            </select>
+          </div>
+
+          <!-- Sub-stats row below title -->
+          <div class="sb-activity-stats-row">
+            <span class="sb-stat-item">Total active days: <strong id="sidebar-active-count">18</strong></span>
+            <span class="sb-stat-divider">•</span>
+            <span class="sb-stat-item">Max streak: <strong id="sidebar-streak-text">5</strong></span>
+          </div>
+
+          <!-- Micro-Heatmap Grid (Mon to Sun rows across week columns) -->
+          <div class="leetcode-heatmap-wrapper">
+            <div class="leetcode-weekday-axis">
+              <span>Mon</span>
+              <span></span>
+              <span>Wed</span>
+              <span></span>
+              <span>Fri</span>
+              <span></span>
+              <span>Sun</span>
+            </div>
+            <div class="leetcode-heatmap-grid" id="leetcode-month-grid">
+              <!-- Compact ~16px × 16px square tiles populated dynamically -->
+            </div>
+          </div>
+
+          <!-- Heatmap Legend -->
+          <div class="leetcode-legend-row">
+            <span class="legend-text">Less</span>
+            <span class="legend-tile lvl-0" title="0 minutes"></span>
+            <span class="legend-tile lvl-1" title="1-10 minutes"></span>
+            <span class="legend-tile lvl-2" title="10-20 minutes"></span>
+            <span class="legend-tile lvl-3" title="20-30 minutes"></span>
+            <span class="legend-tile lvl-4" title="30+ minutes"></span>
+            <span class="legend-text">More</span>
+          </div>
+        </div>
+
+      </aside>
+
+    </div><!-- End app-body-layout -->
+
+  
+    </section>
+
+    <!-- =========================================================
+         SCREEN 4: DEDICATED LEETCODE PROFILE & COGNITIVE RADAR
+         ========================================================= -->
+    <section class="screen-view screen-profile" id="screen-profile" style="display: none;">
+      <header class="app-header">
+        <div class="brand" id="brand-home-profile" title="MindFlow Focus Sanctuary">
+          <div class="brand-mascot-wrapper">
+            <img src="assets/cute_brain_logo.png" alt="MindFlow Cute Brain Logo" class="brand-brain-img">
+          </div>
+          <div class="brand-meta">
+            <h1 class="brand-title">MIND FLOW</h1>
+            <div class="brand-tagline">CONTEMPLATIVE FOCUS PRACTICE</div>
+          </div>
+        </div>
+
+        <div class="top-nav-right">
+          <button class="mode-select-nav-btn" id="btn-profile-to-modes" title="Choose a focus game">
+            <span>🎮 Choose Game</span>
+          </button>
+          <button class="zen-btn" id="btn-profile-to-play" title="Return to Active Gameplay">
+            <span>🧘 Play Practice</span>
+          </button>
+          <button class="theme-toggle-pill" id="theme-toggle-profile" title="Toggle Starlit Night Mode (Key: D)">
+            <span class="theme-icon">🌙</span>
+            <span class="theme-text">Night</span>
+          </button>
+          <button class="user-avatar-badge" id="btn-profile-avatar-pill" title="Switch Account / Edit Player">
+            <span id="profile-header-avatar">🧠</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Profile Hero Banner -->
+      <div class="profile-hero-card">
+        <div class="profile-hero-left">
+          <div class="profile-avatar-circle" id="profile-avatar-display">
+            <span class="avatar-char" id="profile-avatar-icon">🧠</span>
+            <span class="avatar-lvl-badge" id="profile-level-badge">Lv. 1</span>
+          </div>
+          <div class="profile-hero-info">
+            <div class="profile-hero-title-row">
+              <h2 class="profile-username" id="profile-username-text">ZenSeeker</h2>
+              <span class="profile-tier-badge" id="profile-tier-badge">Bronze Anchor</span>
+              <button class="profile-switch-btn" id="btn-trigger-login-modal">Switch Player / Login</button>
+            </div>
+            <p class="profile-bio-text">Cognitive focus disciple • Training sustained attention &amp; working memory</p>
+            <div class="profile-rank-pill">
+              <span>Global Standing: <strong id="profile-rank-text">#1</strong> of <span id="profile-total-players">50</span> Players</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-hero-stats">
+          <div class="profile-stat-box">
+            <span class="p-stat-label">FOCUS INDEX</span>
+            <span class="p-stat-val text-mint" id="profile-focus-val">68</span>
+            <span class="p-stat-sub">High Resonance</span>
+          </div>
+          <div class="profile-stat-box">
+            <span class="p-stat-label">DAY STREAK</span>
+            <span class="p-stat-val text-honey" id="profile-streak-val">1 🔥</span>
+            <span class="p-stat-sub">Active Routine</span>
+          </div>
+          <div class="profile-stat-box">
+            <span class="p-stat-label">PRACTICE TIME</span>
+            <span class="p-stat-val" id="profile-time-val">0 min</span>
+            <span class="p-stat-sub">Deep Focus</span>
+          </div>
+          <div class="profile-stat-box">
+            <span class="p-stat-label">SESSIONS</span>
+            <span class="p-stat-val" id="profile-sessions-val">0</span>
+            <span class="p-stat-sub">Completed</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Profile Body Layout: Left (Radar + Heatmap + Badges) & Right (Leaderboard) -->
+      <div class="profile-body-layout">
+
+        <!-- LEFT COLUMN: Analytics & Progression -->
+        <div class="profile-main-col">
+
+          <!-- 1. Cognitive Radar Profile Chart -->
+          <div class="profile-card profile-radar-card">
+            <div class="profile-card-header">
+              <div class="card-header-title-box">
+                <span class="card-icon-tag">🕸️</span>
+                <h3>COGNITIVE RADAR PROFILE</h3>
+              </div>
+              <span class="card-header-badge">5 Focus Disciplines</span>
+            </div>
+            <p class="profile-card-desc">
+              Your real-time cognitive balance measured across 5 neuroscience-backed domains. Scores dynamically evolve with each gameplay session.
+            </p>
+
+            <div class="radar-content-row">
+              <!-- Interactive SVG Spider Radar -->
+              <div class="radar-svg-container">
+                <svg class="cognitive-radar-svg" id="cognitive-radar-svg" viewBox="0 0 320 320" width="320" height="320">
+                  <!-- Background grid polygons (20%, 40%, 60%, 80%, 100%) -->
+                  <polygon class="radar-web" points="160,40 274,123 231,257 89,257 46,123"></polygon>
+                  <polygon class="radar-web" points="160,64 251,130 216,238 104,238 69,130"></polygon>
+                  <polygon class="radar-web" points="160,88 228,138 202,218 118,218 92,138"></polygon>
+                  <polygon class="radar-web" points="160,112 206,146 188,198 132,198 114,146"></polygon>
+                  <polygon class="radar-web" points="160,136 183,153 174,179 146,179 137,153"></polygon>
+
+                  <!-- Axis lines from center (160, 160) -->
+                  <line class="radar-axis" x1="160" y1="160" x2="160" y2="40"></line>
+                  <line class="radar-axis" x1="160" y1="160" x2="274" y2="123"></line>
+                  <line class="radar-axis" x1="160" y1="160" x2="231" y2="257"></line>
+                  <line class="radar-axis" x1="160" y1="160" x2="89" y2="257"></line>
+                  <line class="radar-axis" x1="160" y1="160" x2="46" y2="123"></line>
+
+                  <!-- Dynamic Player Polygon Fill & Stroke -->
+                  <polygon class="radar-fill" id="radar-player-poly" points="160,88 228,138 202,218 118,218 92,138"></polygon>
+
+                  <!-- Radar Node Dots -->
+                  <circle class="radar-node node-wm" id="radar-node-wm" cx="160" cy="88" r="5"></circle>
+                  <circle class="radar-node node-ic" id="radar-node-ic" cx="228" cy="138" r="5"></circle>
+                  <circle class="radar-node node-sa" id="radar-node-sa" cx="202" cy="218" r="5"></circle>
+                  <circle class="radar-node node-rp" id="radar-node-rp" cx="118" cy="218" r="5"></circle>
+                  <circle class="radar-node node-rs" id="radar-node-rs" cx="92" cy="138" r="5"></circle>
+
+                  <!-- Vertex Labels -->
+                  <text class="radar-label" x="160" y="22" text-anchor="middle">Working Memory</text>
+                  <text class="radar-label" x="284" y="125" text-anchor="start">Inhibitory Control</text>
+                  <text class="radar-label" x="240" y="278" text-anchor="start">Spatial Gaze</text>
+                  <text class="radar-label" x="80" y="278" text-anchor="end">Rhythmic Clock</text>
+                  <text class="radar-label" x="36" y="125" text-anchor="end">Reaction Speed</text>
+                </svg>
+              </div>
+
+              <!-- Domain Breakdown List -->
+              <div class="radar-metrics-col">
+                <div class="radar-metric-item">
+                  <div class="rm-header">
+                    <span class="rm-title">🧩 Working Memory</span>
+                    <strong class="rm-score" id="score-wm">60 / 100</strong>
+                  </div>
+                  <div class="rm-bar-track">
+                    <div class="rm-bar-fill fill-purple" id="bar-wm" style="width: 60%;"></div>
+                  </div>
+                  <span class="rm-sub">Trained via Dual N-Back &amp; Corsi Matrix</span>
+                </div>
+
+                <div class="radar-metric-item">
+                  <div class="rm-header">
+                    <span class="rm-title">🛡️ Inhibitory Control</span>
+                    <strong class="rm-score" id="score-ic">65 / 100</strong>
+                  </div>
+                  <div class="rm-bar-track">
+                    <div class="rm-bar-fill fill-mint" id="bar-ic" style="width: 65%;"></div>
+                  </div>
+                  <span class="rm-sub">Trained via Chroma Shift &amp; Flanker Horizon</span>
+                </div>
+
+                <div class="radar-metric-item">
+                  <div class="rm-header">
+                    <span class="rm-title">🔮 Spatial Attention</span>
+                    <strong class="rm-score" id="score-sa">62 / 100</strong>
+                  </div>
+                  <div class="rm-bar-track">
+                    <div class="rm-bar-fill fill-cyan" id="bar-sa" style="width: 62%;"></div>
+                  </div>
+                  <span class="rm-sub">Trained via Multiple Object Tracking (MOT)</span>
+                </div>
+
+                <div class="radar-metric-item">
+                  <div class="rm-header">
+                    <span class="rm-title">🔔 Rhythmic Precision</span>
+                    <strong class="rm-score" id="score-rp">58 / 100</strong>
+                  </div>
+                  <div class="rm-bar-track">
+                    <div class="rm-bar-fill fill-honey" id="bar-rp" style="width: 58%;"></div>
+                  </div>
+                  <span class="rm-sub">Trained via Tempo Lock &amp; Zen Rhythm</span>
+                </div>
+
+                <div class="radar-metric-item">
+                  <div class="rm-header">
+                    <span class="rm-title">⚡ Reaction Speed</span>
+                    <strong class="rm-score" id="score-rs">64 / 100</strong>
+                  </div>
+                  <div class="rm-bar-track">
+                    <div class="rm-bar-fill fill-clay" id="bar-rs" style="width: 64%;"></div>
+                  </div>
+                  <span class="rm-sub">Trained via Signal &amp; Void (PVT) &amp; Gaze Anchor</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. LeetCode Activity Heatmap Card -->
+          <div class="profile-card profile-heatmap-card">
+            <div class="profile-card-header">
+              <div class="card-header-title-box">
+                <span class="card-icon-tag">📅</span>
+                <h3>ANNUAL ATTENTION CONTINUITY HEATMAP</h3>
+              </div>
+              <div class="card-header-meta">
+                <span class="heatmap-stat-pill">Total Days Active: <strong id="profile-active-days-count">1</strong></span>
+              </div>
+            </div>
+            <div class="profile-heatmap-scroll" id="profile-heatmap-container">
+              <!-- Full year contribution graph populated dynamically -->
+            </div>
+            <div class="leetcode-legend-row" style="margin-top: 14px;">
+              <span class="legend-text">Less</span>
+              <span class="legend-tile lvl-0" title="0 minutes"></span>
+              <span class="legend-tile lvl-1" title="1-10 minutes"></span>
+              <span class="legend-tile lvl-2" title="10-20 minutes"></span>
+              <span class="legend-tile lvl-3" title="20-30 minutes"></span>
+              <span class="legend-tile lvl-4" title="30+ minutes"></span>
+              <span class="legend-text">More</span>
+            </div>
+          </div>
+
+          <!-- 3. Trophy & Achievement Badges Showcase -->
+          <div class="profile-card profile-badges-card">
+            <div class="profile-card-header">
+              <div class="card-header-title-box">
+                <span class="card-icon-tag">🏆</span>
+                <h3>ACHIEVEMENTS &amp; SANCTUARY BADGES</h3>
+              </div>
+              <span class="card-header-badge" id="profile-badge-count-badge">Unlocked: 1</span>
+            </div>
+            <div class="badges-showcase-grid" id="profile-badges-grid">
+              <!-- Populated dynamically via JS from SQL DB -->
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN: Global Competitive Leaderboard -->
+        <aside class="profile-leaderboard-sidebar" aria-label="Global Focus Leaderboard">
+          <div class="profile-card leaderboard-card">
+            <div class="profile-card-header">
+              <div class="card-header-title-box">
+                <span class="card-icon-tag">👑</span>
+                <h3>GLOBAL LEADERBOARD</h3>
+              </div>
+              <span class="live-pill">● LIVE SQL</span>
+            </div>
+            <p class="leaderboard-subtext">
+              Ranked by Focus Index and total mindful practice minutes. Climb the ranks!
+            </p>
+
+            <!-- Leaderboard Podium (Top 3) -->
+            <div class="leaderboard-podium" id="leaderboard-podium">
+              <!-- Top 3 champions podium cards -->
+            </div>
+
+            <!-- Full Leaderboard Table List -->
+            <div class="leaderboard-table-container">
+              <table class="leaderboard-table" id="leaderboard-table">
+                <thead>
+                  <tr>
+                    <th>Rank</th>
+                    <th>Player</th>
+                    <th>Tier</th>
+                    <th>Focus</th>
+                    <th>Streak</th>
+                  </tr>
+                </thead>
+                <tbody id="leaderboard-tbody">
+                  <!-- Rows populated from /api/leaderboard -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </aside>
+
+      </div><!-- End profile-body-layout -->
+
+    </section>
+</div><!-- End app-container -->
+
+  <!-- Results & Analytics Modal (Cozy Reflection) -->
+  <div class="modal-backdrop" id="modal-results">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-label">Session Summary</div>
+        <h3 class="modal-title">Attention Reflection</h3>
+        <button class="modal-close-btn" id="btn-close-results">&times; Close</button>
+      </div>
+
+      <div class="modal-asymmetric-body">
+        <!-- Left Score Column -->
+        <div class="modal-left-col">
+          <div class="telemetry-score-box">
+            <div class="telemetry-tag">FOCUS INDEX</div>
+            <div class="telemetry-number" id="modal-focus-score">92</div>
+            <div class="telemetry-grade" id="modal-result-headline">Calm &amp; Centered</div>
+          </div>
+          <p class="telemetry-notes" id="modal-result-subtext">
+            Sustained attention and inhibitory control remained steady throughout the practice.
+          </p>
+        </div>
+
+        <!-- Right Structured Metrics Column -->
+        <div class="modal-right-col">
+          <div class="data-row">
+            <span class="data-key">Accuracy</span>
+            <span class="data-val" id="modal-accuracy">96%</span>
+          </div>
+          <div class="data-row">
+            <span class="data-key">Response Latency</span>
+            <span class="data-val" id="modal-reaction">298 ms</span>
+          </div>
+          <div class="data-row">
+            <span class="data-key">Steady Streak</span>
+            <span class="data-val" id="modal-streak">18x</span>
+          </div>
+          <div class="data-row">
+            <span class="data-key">Practice Score</span>
+            <span class="data-val" id="modal-score">1,450</span>
+          </div>
+
+          <p class="zen-quote" id="modal-quote">
+            "The mind is like water. When still, everything reflects clearly."
+          </p>
+
+          <button class="cta-btn modal-action-btn" id="btn-restart-from-modal">
+            <span>Continue Practice &rarr;</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Player Authentication & Account Creation Modal -->
+  <div class="modal-backdrop" id="modal-auth" style="display: none;">
+    <div class="modal-content auth-modal-content">
+      <div class="modal-header">
+        <div class="modal-label">Player Profile &amp; Data Sync</div>
+        <h3 class="modal-title">Enter Focus Sanctuary</h3>
+        <button class="modal-close-btn" id="btn-close-auth">&times; Close</button>
+      </div>
+
+      <div class="auth-modal-body">
+        <p class="auth-intro-desc">
+          Sign in or create a player username to store your progress in SQLite, compete on the global leaderboard, and track your Cognitive Radar!
+        </p>
+
+        <!-- Avatar Picker Row -->
+        <div class="auth-section-title">CHOOSE YOUR FOCUS AVATAR</div>
+        <div class="avatar-picker-grid" id="avatar-picker">
+          <button class="avatar-pick-btn active" data-avatar="🧠">🧠</button>
+          <button class="avatar-pick-btn" data-avatar="🦊">🦊</button>
+          <button class="avatar-pick-btn" data-avatar="⚡">⚡</button>
+          <button class="avatar-pick-btn" data-avatar="🦉">🦉</button>
+          <button class="avatar-pick-btn" data-avatar="🌸">🌸</button>
+          <button class="avatar-pick-btn" data-avatar="🔮">🔮</button>
+          <button class="avatar-pick-btn" data-avatar="🧘">🧘</button>
+          <button class="avatar-pick-btn" data-avatar="🌿">🌿</button>
+        </div>
+
+        <!-- Username Input -->
+        <div class="auth-input-group">
+          <label for="input-auth-username">Player Username</label>
+          <input type="text" id="input-auth-username" class="auth-input" placeholder="e.g. ZenSeeker, FlowAdept..." maxlength="20">
+        </div>
+
+        <!-- Optional PIN Input -->
+        <div class="auth-input-group">
+          <label for="input-auth-pin">4-Digit PIN <span class="label-optional">(Optional, for privacy)</span></label>
+          <input type="password" id="input-auth-pin" class="auth-input" placeholder="••••" maxlength="4">
+        </div>
+
+        <div class="auth-error-msg" id="auth-error-msg" style="display: none;"></div>
+
+        <div class="auth-actions-row">
+          <button class="cta-btn auth-submit-btn" id="btn-submit-auth">
+            <span>Enter &amp; Save Progress</span>
+            <span class="cta-arrow">&rarr;</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Audio and Game Logic Scripts -->
+  <script src="audio.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

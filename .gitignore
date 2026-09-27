@@ -1,0 +1,19 @@
+# Node dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment secrets
+.env
+.env.local
+
+# Databases and runtime data
+*.db
+mindflow.db
+mindflow-nosql.json
+
+# Scratch & OS files
+scratch/
+.DS_Store
+Thumbs.db
