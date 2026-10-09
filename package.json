@@ -4,7 +4,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "server": "node server/server.js"
+    "server": "node server/server.js",
+    "build": "echo 'Static build ready'"
   },
   "keywords": [],
   "author": "SPARK45118",
