@@ -178,7 +178,11 @@ app.use((req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.listen(PORT, () => {
-  console.log(`[MindFlow Server] 🍃 Focus Sanctuary (NoSQL) running on http://localhost:${PORT}`);
-  console.log(`[MindFlow Server] 📊 Live Database Admin view available at http://localhost:${PORT}/admin`);
-});
+if (process.env.NODE_ENV !== 'test' && !process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`[MindFlow Server] 🍃 Focus Sanctuary (NoSQL) running on http://localhost:${PORT}`);
+    console.log(`[MindFlow Server] 📊 Live Database Admin view available at http://localhost:${PORT}/admin`);
+  });
+}
+
+module.exports = app;
