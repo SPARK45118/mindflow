@@ -2323,7 +2323,7 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           userId: authController.user.id,
-          gameMode: state.currentMode || 'mot',
+          gameMode: state.mode || 'mot',
           score: state.score || 0,
           accuracy: Math.round(acc * 100),
           reactionMs: Math.round(avgReaction),
