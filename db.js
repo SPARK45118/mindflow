@@ -78,7 +78,6 @@ async function initDb() {
       });
       isConnectedToMongo = true;
       console.log('[MindFlow NoSQL] 🍃 Connected successfully to MongoDB Atlas!');
-      await seedGlobalChampions();
       return;
     } catch (err) {
       console.warn('[MindFlow NoSQL] ⚠️ MongoDB Atlas connection failed:', err.message);
@@ -90,7 +89,6 @@ async function initDb() {
 
   // Fallback to local JSON document store
   loadLocalDb();
-  seedLocalChampions();
 }
 
 function loadLocalDb() {
@@ -130,112 +128,13 @@ const CHAMPIONS_DATA = [
 ];
 
 async function seedGlobalChampions() {
-  try {
-    const count = await UserModel.countDocuments();
-    if (count > 0) return;
-
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-
-    for (const champ of CHAMPIONS_DATA) {
-      const activities = [];
-      for (let day = 1; day <= Math.min(26, today.getDate()); day++) {
-        if ((day + champ.focus) % 3 !== 0) {
-          activities.push({
-            dateStr: `${year}-${month}-${String(day).padStart(2, '0')}`,
-            minutes: 15 + ((day * 7) % 30),
-            sessionsCount: 1 + (day % 3)
-          });
-        }
-      }
-
-      await UserModel.create({
-        username: champ.username,
-        displayName: champ.displayName,
-        avatar: champ.avatar,
-        focusIndex: champ.focus,
-        streak: champ.streak,
-        maxStreak: champ.streak + 5,
-        totalMinutes: champ.mins,
-        totalSessions: champ.sessions,
-        tier: champ.tier,
-        level: Math.floor(champ.mins / 30) + 1,
-        cognitiveScores: {
-          workingMemory: champ.wm,
-          inhibitoryControl: champ.ic,
-          spatialAttention: champ.sa,
-          rhythmicPrecision: champ.rp,
-          reactionSpeed: champ.rs
-        },
-        badges: [
-          { badgeKey: 'first_spark', title: 'First Spark', description: 'Completed initial focus practice session.', icon: '🌱' },
-          { badgeKey: 'zen_flow', title: 'Zen Master', description: 'Maintained a Focus Index of 85+.', icon: '🏆' },
-          { badgeKey: 'streak_hero', title: 'Flame Keeper', description: 'Maintained a daily focus streak of 7+ days.', icon: '🔥' }
-        ],
-        activityDays: activities
-      });
-    }
-    console.log('[MindFlow NoSQL] Seeded champions in MongoDB Atlas.');
-  } catch (err) {
-    console.warn('[MindFlow NoSQL] Seeding error:', err.message);
-  }
+  // Disabled: bot database eliminated
+  return;
 }
 
 function seedLocalChampions() {
-  if (localDb.users.length > 0) return;
-
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = String(today.getMonth() + 1).padStart(2, '0');
-
-  CHAMPIONS_DATA.forEach((champ, idx) => {
-    const activities = [];
-    for (let day = 1; day <= Math.min(26, today.getDate()); day++) {
-      if ((day + champ.focus) % 3 !== 0) {
-        activities.push({
-          dateStr: `${year}-${month}-${String(day).padStart(2, '0')}`,
-          minutes: 15 + ((day * 7) % 30),
-          sessionsCount: 1 + (day % 3)
-        });
-      }
-    }
-
-    localDb.users.push({
-      _id: 'champ_' + (idx + 1),
-      username: champ.username,
-      displayName: champ.displayName,
-      avatar: champ.avatar,
-      pin: '',
-      focusIndex: champ.focus,
-      streak: champ.streak,
-      maxStreak: champ.streak + 5,
-      totalMinutes: champ.mins,
-      totalSessions: champ.sessions,
-      tier: champ.tier,
-      level: Math.floor(champ.mins / 30) + 1,
-      cognitiveScores: {
-        workingMemory: champ.wm,
-        inhibitoryControl: champ.ic,
-        spatialAttention: champ.sa,
-        rhythmicPrecision: champ.rp,
-        reactionSpeed: champ.rs,
-        updatedAt: new Date().toISOString()
-      },
-      badges: [
-        { badgeKey: 'first_spark', title: 'First Spark', description: 'Completed initial focus practice session.', icon: '🌱', unlockedAt: new Date().toISOString() },
-        { badgeKey: 'zen_flow', title: 'Zen Master', description: 'Maintained a Focus Index of 85+.', icon: '🏆', unlockedAt: new Date().toISOString() },
-        { badgeKey: 'streak_hero', title: 'Flame Keeper', description: 'Maintained a daily focus streak of 7+ days.', icon: '🔥', unlockedAt: new Date().toISOString() }
-      ],
-      activityDays: activities,
-      sessions: [],
-      lastActive: new Date().toISOString(),
-      createdAt: new Date().toISOString()
-    });
-  });
-
-  saveLocalDb();
-  console.log('[MindFlow NoSQL] Seeded champions in local NoSQL store.');
+  // Disabled: bot database eliminated
+  return;
 }
 
 // -------------------------------------------------------------
