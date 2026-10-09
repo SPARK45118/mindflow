@@ -31,6 +31,12 @@
     }
   };
 
+  // Dynamic API Base URL resolver for decoupled deployment
+  function getApiUrl(endpoint) {
+    const base = (window.MINDFLOW_API_BASE || '').trim().replace(/\/$/, '');
+    return base ? `${base}${endpoint}` : endpoint;
+  }
+
   // Load user stats from localStorage
   function loadPersistedStats() {
     try {
@@ -2316,9 +2322,9 @@
     savePersistedStats();
     monthActivityController.recordTodayActive();
 
-    // Sync Session with SQLite Backend
+    // Sync Session with Backend
     if (authController.user && authController.user.id) {
-      fetch('/api/sessions/record', {
+      fetch(getApiUrl('/api/sessions/record'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -2641,7 +2647,7 @@
       const avatar = saved?.avatar || '🧠';
 
       try {
-        const res = await fetch('/api/auth/login', {
+        const res = await fetch(getApiUrl('/api/auth/login'), {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ username, avatar })
@@ -2740,7 +2746,7 @@
         }
 
         try {
-          const res = await fetch('/api/auth/login', {
+          const res = await fetch(getApiUrl('/api/auth/login'), {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, avatar: selectedAvatar, pin })
@@ -2785,8 +2791,8 @@
       const username = authController.user?.username || 'ZenSeeker';
       try {
         const [profileRes, lbRes] = await Promise.all([
-          fetch('/api/profile/' + encodeURIComponent(username)),
-          fetch('/api/leaderboard')
+          fetch(getApiUrl('/api/profile/' + encodeURIComponent(username))),
+          fetch(getApiUrl('/api/leaderboard'))
         ]);
 
         if (profileRes.ok) {
