@@ -1,12 +1,12 @@
 {
-  "name": "mindflow",
+  "name": "mindflow-server",
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "server": "node server/server.js"
+    "dev": "node server.js"
   },
-  "keywords": [],
+  "keywords": ["cognitive", "api", "express", "mongodb"],
   "author": "SPARK45118",
   "license": "ISC",
   "dependencies": {

@@ -69,17 +69,44 @@ PORT=3000
 
 ### 4. Start the application
 ```bash
-node server.js
+npm start
 ```
 
 Open **[http://localhost:3000](http://localhost:3000)** in your browser!
 
 ---
 
+## 🌐 Separate (Decoupled) Deployment Guide
+
+MindFlow is organized into decoupled `client/` and `server/` directories:
+
+```
+focus-flow/
+├── client/          <-- Frontend (HTML5 Canvas, Audio API, Glassmorphism UI)
+└── server/          <-- Backend (Node.js, Express REST API, MongoDB NoSQL)
+```
+
+### 1. Deploy the Backend (`server/`)
+- **Platform**: [Render](https://render.com) or [Railway](https://railway.app)
+- **Root Directory**: `server`
+- **Build Command**: `npm install`
+- **Start Command**: `node server.js`
+- **Environment Variable**: `MONGODB_URI=your_mongodb_connection_string`
+
+### 2. Deploy the Frontend (`client/`)
+- **Platform**: [Vercel](https://vercel.com), [Netlify](https://netlify.com), or [GitHub Pages](https://pages.github.com)
+- **Root Directory**: `client`
+- In `client/config.js`, set your deployed backend URL:
+  ```javascript
+  window.MINDFLOW_API_BASE = 'https://your-backend-service.onrender.com';
+  ```
+
+---
+
 ## 📊 Live Database Admin Panel
 
 MindFlow includes a built-in admin dashboard to inspect registered players and logins:
-- Open **[http://localhost:3000/admin](http://localhost:3000/admin)** in your browser.
+- Open **[http://localhost:3000/admin](http://localhost:3000/admin)** (or `https://your-backend-service.onrender.com/admin`) in your browser.
 
 ---
 

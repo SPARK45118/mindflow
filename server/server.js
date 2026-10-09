@@ -21,11 +21,13 @@ db.initDb();
 app.use(cors({ origin: '*' }));
 app.use(express.json());
 
-const clientDir = path.join(__dirname, 'client');
+// Serve client static files if running together locally
+const clientDir = path.join(__dirname, '../client');
 if (fs.existsSync(clientDir)) {
   app.use(express.static(clientDir));
+} else {
+  app.use(express.static(path.join(__dirname, '..')));
 }
-app.use(express.static(path.join(__dirname)));
 
 // -------------------------------------------------------------
 // AUTHENTICATION: LOGIN OR REGISTER
@@ -181,9 +183,18 @@ app.get('/admin', async (req, res) => {
   }
 });
 
-// Fallback to index.html for SPA screens
-app.use((req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+// Fallback for SPA screens when served locally
+app.use((req, res, next) => {
+  if (req.path.startsWith('/api') || req.path === '/admin') return next();
+  const clientIndex = path.join(__dirname, '../client/index.html');
+  if (fs.existsSync(clientIndex)) {
+    return res.sendFile(clientIndex);
+  }
+  const rootIndex = path.join(__dirname, '../index.html');
+  if (fs.existsSync(rootIndex)) {
+    return res.sendFile(rootIndex);
+  }
+  return res.json({ status: 'MindFlow API Server Active' });
 });
 
 if (process.env.NODE_ENV !== 'test' && !process.env.VERCEL) {
