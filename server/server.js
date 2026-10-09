@@ -139,7 +139,7 @@ function checkAdminAuth(req) {
   return false;
 }
 
-// Protected JSON API
+// Protected JSON API: Get All Users
 app.get('/api/admin/users', async (req, res) => {
   if (!checkAdminAuth(req)) {
     return res.status(401).json({ error: 'Unauthorized: Admin Master Password required.' });
@@ -147,6 +147,45 @@ app.get('/api/admin/users', async (req, res) => {
   try {
     const data = await db.getAllPlayersForAdmin();
     return res.json(data);
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+});
+
+// Protected JSON API: Delete User
+app.delete('/api/admin/users/:id', async (req, res) => {
+  if (!checkAdminAuth(req)) {
+    return res.status(401).json({ error: 'Unauthorized: Admin Master Password required.' });
+  }
+  try {
+    const success = await db.deleteUserById(req.params.id);
+    return res.json({ success, message: success ? 'User deleted' : 'User not found' });
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+});
+
+// Protected JSON API: Custom User Action (delete, clear_pin, reset_stats)
+app.post('/api/admin/users/:id/action', async (req, res) => {
+  if (!checkAdminAuth(req)) {
+    return res.status(401).json({ error: 'Unauthorized: Admin Master Password required.' });
+  }
+  try {
+    const { action } = req.body;
+    const { id } = req.params;
+    let success = false;
+
+    if (action === 'delete') {
+      success = await db.deleteUserById(id);
+    } else if (action === 'clear_pin') {
+      success = await db.clearUserPin(id);
+    } else if (action === 'reset_stats') {
+      success = await db.resetUserData(id);
+    } else {
+      return res.status(400).json({ error: 'Invalid action type' });
+    }
+
+    return res.json({ success, action });
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }
@@ -166,13 +205,40 @@ app.post('/admin/login', (req, res) => {
   }
 });
 
+// Admin Form POST Action (Delete / Clear PIN / Reset Stats from web UI)
+app.post('/admin/action', async (req, res) => {
+  if (!checkAdminAuth(req)) {
+    return res.redirect('/admin');
+  }
+
+  const { userId, actionType } = req.body;
+  if (!userId) return res.redirect('/admin');
+
+  try {
+    if (actionType === 'delete') {
+      await db.deleteUserById(userId);
+      return res.redirect('/admin?msg=deleted');
+    } else if (actionType === 'clear_pin') {
+      await db.clearUserPin(userId);
+      return res.redirect('/admin?msg=pin_cleared');
+    } else if (actionType === 'reset_stats') {
+      await db.resetUserData(userId);
+      return res.redirect('/admin?msg=stats_reset');
+    }
+  } catch (err) {
+    return res.redirect(`/admin?error=${encodeURIComponent(err.message)}`);
+  }
+
+  return res.redirect('/admin');
+});
+
 // Admin Logout
 app.get('/admin/logout', (req, res) => {
   res.setHeader('Set-Cookie', 'mindflow_admin_auth=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly; SameSite=Lax');
   return res.redirect('/admin');
 });
 
-// Live Web Page to Inspect Database (Password Gated)
+// Live Web Page to Inspect & Manage Database (Password Gated)
 app.get('/admin', async (req, res) => {
   // If not authenticated, show password prompt
   if (!checkAdminAuth(req)) {
@@ -206,7 +272,7 @@ app.get('/admin', async (req, res) => {
       <div class="login-card">
         <div class="icon">🔐</div>
         <h1>Admin Database Access</h1>
-        <p>This portal is restricted. Please enter the master admin password to inspect player records & database metrics.</p>
+        <p>This portal is restricted. Please enter the master admin password to inspect & manage player records.</p>
         ${hasError ? '<div class="error-badge">⚠️ Incorrect master password. Please try again.</div>' : ''}
         <form method="POST" action="/admin/login">
           <div class="form-group">
@@ -225,7 +291,17 @@ app.get('/admin', async (req, res) => {
   // Authenticated Admin Dashboard
   try {
     const data = await db.getAllPlayersForAdmin();
-    const rowsHtml = data.users.map(u => `
+
+    let msgBanner = '';
+    if (req.query.msg === 'deleted') {
+      msgBanner = '<div class="banner banner-success">🗑️ Player account and all associated data permanently deleted.</div>';
+    } else if (req.query.msg === 'pin_cleared') {
+      msgBanner = '<div class="banner banner-success">🔑 Player PIN / password cleared. User can now sign in freely without PIN.</div>';
+    } else if (req.query.msg === 'stats_reset') {
+      msgBanner = '<div class="banner banner-success">🔄 Player stats (minutes, sessions, streaks) reset to initial state.</div>';
+    }
+
+    const rowsHtml = data.users.length > 0 ? data.users.map(u => `
       <tr style="border-bottom: 1px solid #e7e5e4;">
         <td style="padding: 10px 14px; font-weight: 700;">${u.avatar} ${u.username}</td>
         <td style="padding: 10px 14px; font-family: monospace; color: #78716c;">${u.raw_pin ? u.raw_pin : '<em style="color:#a8a29e;">(None)</em>'}</td>
@@ -234,8 +310,31 @@ app.get('/admin', async (req, res) => {
         <td style="padding: 10px 14px;">${u.total_minutes} min (${u.total_sessions} sess)</td>
         <td style="padding: 10px 14px;"><span style="background: #f5f5f4; border: 1px solid #d6d3d1; padding: 2px 8px; border-radius: 6px; font-size: 11px;">${u.tier}</span></td>
         <td style="padding: 10px 14px; font-size: 12px; color: #57534e;">${new Date(u.last_active).toLocaleString()}</td>
+        <td style="padding: 10px 14px; white-space: nowrap;">
+          <form method="POST" action="/admin/action" style="display:inline;" onsubmit="return confirm('Permanently delete player \\'${u.username}\\'? This removes all account and login data.');">
+            <input type="hidden" name="userId" value="${u.id}">
+            <input type="hidden" name="actionType" value="delete">
+            <button type="submit" class="btn-del" title="Permanently delete user">🗑️ Delete</button>
+          </form>
+          <form method="POST" action="/admin/action" style="display:inline; margin-left: 4px;" onsubmit="return confirm('Clear PIN password for \\'${u.username}\\'?');">
+            <input type="hidden" name="userId" value="${u.id}">
+            <input type="hidden" name="actionType" value="clear_pin">
+            <button type="submit" class="btn-pin" title="Clear PIN password">🔑 Clear PIN</button>
+          </form>
+          <form method="POST" action="/admin/action" style="display:inline; margin-left: 4px;" onsubmit="return confirm('Reset practice minutes, streaks, and sessions for \\'${u.username}\\'?');">
+            <input type="hidden" name="userId" value="${u.id}">
+            <input type="hidden" name="actionType" value="reset_stats">
+            <button type="submit" class="btn-rst" title="Reset stats to zero">🔄 Reset Stats</button>
+          </form>
+        </td>
       </tr>
-    `).join('');
+    `).join('') : `
+      <tr>
+        <td colspan="8" style="text-align: center; padding: 36px; color: #78716c; font-weight: 500;">
+          No registered players found in database.
+        </td>
+      </tr>
+    `;
 
     const html = `<!DOCTYPE html>
     <html lang="en">
@@ -244,16 +343,25 @@ app.get('/admin', async (req, res) => {
       <title>MindFlow • NoSQL Database Admin Viewer</title>
       <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
       <style>
+        * { box-sizing: border-box; }
         body { font-family: 'Quicksand', sans-serif; background: #FAF7F2; color: #292524; margin: 0; padding: 32px; }
-        .admin-card { max-width: 1060px; margin: 0 auto; background: #ffffff; border-radius: 20px; border: 2px solid #E7E5E4; box-shadow: 0 10px 30px rgba(0,0,0,0.06); padding: 28px; }
+        .admin-card { max-width: 1180px; margin: 0 auto; background: #ffffff; border-radius: 20px; border: 2px solid #E7E5E4; box-shadow: 0 10px 30px rgba(0,0,0,0.06); padding: 28px; }
         h1 { font-family: 'Fredoka', cursive; font-size: 26px; color: #1c1917; margin: 0 0 6px 0; }
-        .meta-strip { display: flex; gap: 16px; margin: 12px 0 24px 0; font-size: 13px; font-weight: 600; }
+        .meta-strip { display: flex; gap: 16px; margin: 12px 0 20px 0; font-size: 13px; font-weight: 600; }
         .pill { background: #ECFDF5; color: #065F46; border: 1px solid #A7F3D0; padding: 4px 12px; border-radius: 12px; }
+        .banner { padding: 12px 18px; border-radius: 12px; font-size: 13px; font-weight: 700; margin-bottom: 20px; }
+        .banner-success { background: #ECFDF5; color: #047857; border: 1px solid #A7F3D0; }
         table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; }
         th { background: #FAF7F2; padding: 12px 14px; font-family: 'Fredoka', cursive; font-weight: 700; color: #44403C; border-bottom: 2px solid #E7E5E4; }
-        .btn-refresh { background: #047857; color: white; border: none; padding: 8px 16px; border-radius: 10px; font-weight: 700; cursor: pointer; text-decoration: none; font-size: 13px; }
+        .btn-refresh { background: #047857; color: white; border: none; padding: 8px 16px; border-radius: 10px; font-weight: 700; cursor: pointer; text-decoration: none; font-size: 13px; display: inline-flex; align-items: center; }
         .btn-logout { background: #FEE2E2; color: #B91C1C; border: 1px solid #FCA5A5; padding: 8px 16px; border-radius: 10px; font-weight: 700; text-decoration: none; font-size: 13px; margin-left: 8px; }
         .btn-home { background: #f5f5f4; color: #292524; border: 1px solid #d6d3d1; padding: 8px 16px; border-radius: 10px; font-weight: 600; text-decoration: none; font-size: 13px; margin-left: 8px; }
+        .btn-del { background: #FEE2E2; color: #DC2626; border: 1px solid #FECACA; padding: 5px 10px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 11px; transition: all 0.15s; }
+        .btn-del:hover { background: #DC2626; color: white; }
+        .btn-pin { background: #FEF3C7; color: #D97706; border: 1px solid #FDE68A; padding: 5px 10px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 11px; transition: all 0.15s; }
+        .btn-pin:hover { background: #D97706; color: white; }
+        .btn-rst { background: #E0F2FE; color: #0284C7; border: 1px solid #BAE6FD; padding: 5px 10px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 11px; transition: all 0.15s; }
+        .btn-rst:hover { background: #0284C7; color: white; }
       </style>
     </head>
     <body>
@@ -274,6 +382,8 @@ app.get('/admin', async (req, res) => {
           </div>
         </div>
 
+        ${msgBanner}
+
         <table>
           <thead>
             <tr>
@@ -284,6 +394,7 @@ app.get('/admin', async (req, res) => {
               <th>Practice Time</th>
               <th>Rank Tier</th>
               <th>Last Active / Login</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>

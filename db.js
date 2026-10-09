@@ -598,6 +598,91 @@ async function getAllPlayersForAdmin() {
   };
 }
 
+// -------------------------------------------------------------
+// ADMIN ACTIONS: DELETE USER, CLEAR PIN, RESET STATS
+// -------------------------------------------------------------
+async function deleteUserById(userId) {
+  if (!userId) return false;
+  if (isConnectedToMongo) {
+    const isObjectId = mongoose.Types.ObjectId.isValid(userId);
+    const query = isObjectId 
+      ? { $or: [{ _id: userId }, { username: userId }] }
+      : { username: userId };
+    const res = await UserModel.deleteOne(query);
+    return res.deletedCount > 0;
+  }
+  loadLocalDb();
+  const initLen = localDb.users.length;
+  localDb.users = localDb.users.filter(u => u._id !== userId && u.username !== userId);
+  if (localDb.users.length !== initLen) {
+    saveLocalDb();
+    return true;
+  }
+  return false;
+}
+
+async function clearUserPin(userId) {
+  if (!userId) return false;
+  if (isConnectedToMongo) {
+    const isObjectId = mongoose.Types.ObjectId.isValid(userId);
+    const query = isObjectId 
+      ? { $or: [{ _id: userId }, { username: userId }] }
+      : { username: userId };
+    const res = await UserModel.updateOne(query, { $set: { pin: '' } });
+    return res.modifiedCount > 0;
+  }
+  loadLocalDb();
+  const user = localDb.users.find(u => u._id === userId || u.username === userId);
+  if (user) {
+    user.pin = '';
+    saveLocalDb();
+    return true;
+  }
+  return false;
+}
+
+async function resetUserData(userId) {
+  if (!userId) return false;
+  if (isConnectedToMongo) {
+    const isObjectId = mongoose.Types.ObjectId.isValid(userId);
+    const query = isObjectId 
+      ? { $or: [{ _id: userId }, { username: userId }] }
+      : { username: userId };
+    const res = await UserModel.updateOne(query, {
+      $set: {
+        focusIndex: 50,
+        streak: 0,
+        maxStreak: 0,
+        totalMinutes: 0,
+        totalSessions: 0,
+        tier: 'Bronze Spark',
+        level: 1,
+        sessions: [],
+        activityDays: [],
+        badges: []
+      }
+    });
+    return res.modifiedCount > 0;
+  }
+  loadLocalDb();
+  const user = localDb.users.find(u => u._id === userId || u.username === userId);
+  if (user) {
+    user.focusIndex = 50;
+    user.streak = 0;
+    user.maxStreak = 0;
+    user.totalMinutes = 0;
+    user.totalSessions = 0;
+    user.tier = 'Bronze Spark';
+    user.level = 1;
+    user.sessions = [];
+    user.activityDays = [];
+    user.badges = [];
+    saveLocalDb();
+    return true;
+  }
+  return false;
+}
+
 module.exports = {
   initDb,
   loginOrCreateUser,
@@ -605,5 +690,8 @@ module.exports = {
   recordSession,
   getLeaderboard,
   getAllPlayersForAdmin,
+  deleteUserById,
+  clearUserPin,
+  resetUserData,
   isMongoActive: () => isConnectedToMongo
 };
